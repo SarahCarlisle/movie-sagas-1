@@ -11,6 +11,16 @@ CREATE TABLE "genres" (
   "name" VARCHAR(80) NOT NULL
 );
 
+CREATE TABLE "movie_genre" (
+  "movie_id" INT REFERENCES "movies",
+  "genre_id" INT REFERENCES "genres"
+);
+
+SELECT "movies"."id", "movies"."title", "movies"."poster", "movies"."description", "genres"."name" FROM "movie_genre"
+JOIN "movies" ON "movie_genre"."movie_id" = "movies"."id"
+JOIN "genres" ON "movie_genre"."genre_id" = "genres"."id"
+GROUP BY "movies"."id", "genres"."name";
+
 
 -- CREATE JUNCTION TABLE
 -- You will need to create the junction table that stores the relationships between "movies" and "genres"
