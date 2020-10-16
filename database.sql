@@ -22,6 +22,14 @@ JOIN "genres" ON "movie_genre"."genre_id" = "genres"."id"
 GROUP BY "movies"."id", "genres"."name";
 
 
+
+
+SELECT "movies"."id", "movies"."title", "movies"."poster", "movies"."description", array_agg("genres"."name") AS "movie_genres" FROM "movies"
+JOIN "movie_genre" ON "movies"."id" = "movie_genre"."movie_id"
+JOIN "genres" ON "movie_genre"."genre_id" = "genres"."id"
+GROUP BY "movies"."id";
+
+
 -- CREATE JUNCTION TABLE
 -- You will need to create the junction table that stores the relationships between "movies" and "genres"
 -- This table will need to be populated with some data as well (INSERTS)
