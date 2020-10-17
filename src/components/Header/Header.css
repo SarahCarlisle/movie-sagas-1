@@ -4,8 +4,11 @@ header {
     background: rgb(0, 0, 0);
     background: linear-gradient(90deg, rgba(0, 0, 0, 1) 10%, rgba(53, 82, 80, 1) 25%, rgba(104, 147, 158, 1) 38%, rgba(62, 184, 222, 1) 50%, rgba(104, 147, 158, 1) 62%, rgba(53, 82, 80, 1) 75%, rgba(0, 0, 0, 1) 90%);
     font-family: Chalkduster, fantasy;
+    width: 100%;
+    
 }
 
 .home-button{
     display:flex;
+
 }

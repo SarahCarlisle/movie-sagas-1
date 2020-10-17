@@ -9,17 +9,18 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router';
 
 
 
 const useStyles = makeStyles({
     root: {
         maxHeight: 540,
-        maxWidth: 345,
-        marginBottom: 25,
+        maxWidth: 350,
+        marginLeft: 25,
         marginTop: 25,
-        marginLeft: 10, 
-        marginRight: 10,
+        marginRight: 25,
+
     },
     media: {
         height: 450,
@@ -28,13 +29,18 @@ const useStyles = makeStyles({
 
 const MovieItem = (props) => {
 
+
+    const details = () => {
+        props.history.push(`/details/${props.movie.id}`)
+    }
+
     const classes = useStyles();
-    console.log(props)
+    //console.log(props)
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
         <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea onClick={details} >
                 <CardMedia
                     className={classes.media}
                     image={props.movie.poster}
@@ -59,4 +65,4 @@ const MovieItem = (props) => {
 }
 
 
-export default connect()(MovieItem);
+export default connect()(withRouter(MovieItem));

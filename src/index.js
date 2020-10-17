@@ -15,6 +15,14 @@ import { takeEvery, put } from 'redux-saga/effects';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('GET_MOVIES', fetchMoviesSaga)
+    yield takeEvery('GET_GENRES', fetchGenresSaga)
+}
+
+function* fetchGenresSaga(action){
+    try{
+        const response = yield Axios.get('/movies/genre');
+        yield put({ type: 'SET_GENRES', payload: response.data})
+    }catch(err){console.log('ERROR getting genres', err);}
 }
 
 function* fetchMoviesSaga(action){
@@ -27,7 +35,7 @@ function* fetchMoviesSaga(action){
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to store movies returned from the server
+// Used to store movies returned from the server the state will be an array of objects
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -37,7 +45,7 @@ const movies = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// Used to store the movie genres the state will be an array of objects
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':

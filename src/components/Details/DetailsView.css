@@ -1,0 +1,22 @@
+img {
+    margin: 25px;
+    display: flex;
+    min-width: 185px;
+}
+
+p {
+    display: flex;
+}
+
+.description {
+    margin-left: 20px;
+    padding: 5px;
+}
+.details-view {
+    display: flex;
+}
+.details-of-movie {
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap ;
+}

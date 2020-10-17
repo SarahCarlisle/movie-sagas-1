@@ -12,8 +12,9 @@ CREATE TABLE "genres" (
 );
 
 CREATE TABLE "movie_genre" (
+	"movie_genre_table_id" SERIAL PRIMARY KEY,
   "movie_id" INT REFERENCES "movies",
-  "genre_id" INT REFERENCES "genres"
+  "genre_id" INT REFERENCES "genres"  
 );
 
 SELECT "movies"."id", "movies"."title", "movies"."poster", "movies"."description", "genres"."name" FROM "movie_genre"
