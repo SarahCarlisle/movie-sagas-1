@@ -1,15 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import './App.css';
+import { connect } from 'react-redux';
+import Movies from '../Movies/Movies';
+import Header from '../Header/Header';
 
-class App extends Component {
+const App = (props) =>  {
+  useEffect( () =>
+    {props.dispatch({ type: 'GET_MOVIES'})},[]);
   // Renders the entire app on the DOM
-  render() {
+  
+    console.log('app props',props.movies);
     return (
       <div className="App">
-        <p>Empty Page</p>
+        <Header />
+        <Movies />
       </div>
     );
-  }
+
 }
 
-export default App;
+const map = (state) => ({movies: state.movies})
+
+export default connect(map)(App);
