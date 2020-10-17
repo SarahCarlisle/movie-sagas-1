@@ -14,8 +14,16 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('GET_MOVIES', fetchMoviesSaga)
-    yield takeEvery('GET_GENRES', fetchGenresSaga)
+    yield takeEvery('GET_MOVIES', fetchMoviesSaga);
+    yield takeEvery('GET_GENRES', fetchGenresSaga);
+    yield takeEvery('UPDATE_MOVIE', putMovieSaga);
+}
+
+function* putMovieSaga(action){
+    try{
+        yield Axios.put('/movies/update', action.payload)
+        yield put({type:'GET_MOVIES'})
+    }catch(err){console.log('ERROR updating movie', err);}
 }
 
 function* fetchGenresSaga(action){

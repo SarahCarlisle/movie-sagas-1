@@ -10,8 +10,7 @@ import {HashRouter as Router, Route } from 'react-router-dom'
 //components
 import Details from '../Details/Details';
 import Movies from '../Movies/Movies';
-import Header from '../Header/Header';
-
+import EditMovie from '../EditMovie/EditMovie';
 
 const App = (props) =>  {
 
@@ -28,6 +27,9 @@ const App = (props) =>  {
           </Route>
           <Route path="/details/:id">
             <Details />
+          </Route>
+          <Route path="/edit/:id">
+            <EditMovie />
           </Route>
         </Router>
       </Grid>

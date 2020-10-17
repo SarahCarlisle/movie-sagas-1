@@ -39,6 +39,10 @@ const Details = (props) => {
   const movie =  props.movies.filter(m => m.id === Number(id));
     console.log('details movie is', movie);
 
+    const editMovie = () => {
+        props.history.push(`/edit/${id}`);
+    }
+
 
     
     return (
@@ -46,11 +50,12 @@ const Details = (props) => {
         
         <>   
             <header className="App" >
-                <h1>Details</h1>
+                {movie[0] != undefined ? (<h1>{movie[0].title}</h1>) : <h1>Edit</h1>}
                 <span className="home-button">
                     <Button className={classes.root} onClick={home}>
                         <ArrowBackIcon />Back
                     </Button>
+                    <Button className={classes.root} onClick={editMovie}>Edit</Button>
                 </span>
             </header>
         <Grid >
