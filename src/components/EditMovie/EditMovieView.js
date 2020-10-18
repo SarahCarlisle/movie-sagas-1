@@ -38,6 +38,11 @@ const genreOptions = () => {
     props.genreList.filter(genre => genres[0].movie_genres.indexOf(genre.name) == -1).map(genre => <li>{genre.name}</li>)
 }
 
+const addGenre = (event) => {
+    console.log(event.target.value,"was clicked");
+    props.dispatch({type:'ADD_GENRE_TO_MOVIE', payload:{movie_id: props.movie.id, genre_id: Number(event.target.value)}});
+}
+
     return (
         <div >
             {genres[0] != undefined && console.log(genreOptions())}
@@ -53,15 +58,17 @@ const genreOptions = () => {
                 <button onClick={backToDetails}>Cancel</button>
                 <br/>
                 <label>Add Genre:</label>
-                {genres[0] != undefined && <select >
+                {genres[0] != undefined && <select onChange={addGenre} >
                     <option value=""></option>
                     {/* filter the genreList from the database so it removes the genres
                     already associated with this movie... this way only genres that 
-                    are not already on the movie title will be shown in the drop down menue */}
+                    are not already on the movie title will be shown in the drop down menu */}
                     {genres[0].movie_genres != undefined && props.genreList.filter(genre => genres[0].movie_genres.indexOf(genre.name) == -1).map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
                 </select>}
                 <ul>
-                    {/*  */}
+                    {/* filter through and pull out the genres associated with this movie
+                    i did this so i have access to both the id of the genre and the name of the
+                    genre.   */}
                     {genres[0] != undefined && props.genreList.filter(genre => genres[0].movie_genres.indexOf(genre.name) != -1).map(genre => <li key={genre.id}>{genre.name}  <button>Remove Genre</button></li>)}
                 </ul>
 

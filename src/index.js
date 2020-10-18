@@ -18,7 +18,16 @@ function* rootSaga() {
     yield takeEvery('GET_GENRES', fetchGenresSaga);
     yield takeEvery('UPDATE_MOVIE', putMovieSaga);
     yield takeEvery('GET_GENRE_DATABASE', fetchGenreDatabaseSaga);
+    yield takeEvery('ADD_GENRE_TO_MOVIE', addGenreToMovieSaga)
 }
+
+function* addGenreToMovieSaga(action){
+    try{
+        const resposne = yield Axios.post('/movies/add/genre/movie', action.payload);
+        yield put({type:'GET_GENRES'});
+    }catch(err){console.log('ERROR adding genre to movie', err);}
+}
+
 
 function* fetchGenreDatabaseSaga(action){
     try{

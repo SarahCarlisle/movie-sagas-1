@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     });
 });
 
-
+//route to update movie title and description
 router.put('/update', (req, res) => {
     let queryText = `UPDATE "movies" SET "title"=$1, "description"=$2 WHERE "id"=$3; `;
     pool.query(queryText, [req.body.title, req.body.description, req.body.id])
@@ -35,11 +35,20 @@ router.put('/update', (req, res) => {
     });
 });
 
-
+//route to get all genres from the genres table
 router.get('/genre/all', (req, res) => {
     let queryText = `SELECT * FROM "genres"`
     pool.query(queryText).then(result => res.send(result.rows)).catch(err => {
         console.log('ERROR getting all genres', err);
+        res.sendStatus(500);
+    })
+})
+
+//route to add a genre to a movie
+router.post('/add/genre/movie', (req, res) => {
+    let queryText = `INSERT INTO "movie_genre" ("movie_id", "genre_id") VALUES ($1,$2)`;
+    pool.query(queryText, [req.body.movie_id, req.body.genre_id]).then(result => res.sendStatus(200)).catch(err => {
+        console.log('Error in posting genre for movie', err);
         res.sendStatus(500);
     })
 })
