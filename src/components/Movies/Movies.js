@@ -6,13 +6,25 @@ import Header from '../Header/Header';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+    input:{marginTop: 25},
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+}));
 
 
 
 //this is the component that will display all of the movies
 //we will dispatch to get movies and genres on loading of the component
 const Movies = (props) => {
+    const classes = useStyles();
     useEffect(() => { props.dispatch({ type: 'GET_MOVIES' }) }, []);
     useEffect(() => { props.dispatch({ type: 'GET_GENRES' }) }, []);
     useEffect(() => { props.dispatch({ type: 'GET_GENRE_DATABASE' }) }, []);
@@ -35,8 +47,8 @@ const filterMovies = (event) => {
             {console.log(filter)}
             <div className="App">
                 <Header />
-                <InputLabel>Filter By Category</InputLabel>
-                <Select value={filter} onChange={filterMovies} >
+                <InputLabel className={classes.input}>Filter By Category</InputLabel>
+                <Select value={filter} className={classes.formControl} onChange={filterMovies} >
                     <MenuItem value={false}>All</MenuItem>
                     {props.genreList[0] != undefined && props.genreList.map(genre => <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>)}
                 </Select>
