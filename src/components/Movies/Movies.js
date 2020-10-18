@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Header from '../Header/Header';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 
 
@@ -33,8 +35,8 @@ const filterMovies = (event) => {
             {console.log(filter)}
             <div className="App">
                 <Header />
-                <Select defaultValue="0" autoWidth={true} onChange={filterMovies} >
-                    <MenuItem value="0">Filter By Category</MenuItem>
+                <InputLabel>Filter By Category</InputLabel>
+                <Select value={filter} onChange={filterMovies} >
                     <MenuItem value={false}>All</MenuItem>
                     {props.genreList[0] != undefined && props.genreList.map(genre => <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>)}
                 </Select>
