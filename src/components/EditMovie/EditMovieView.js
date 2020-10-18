@@ -196,7 +196,7 @@ const EditMovieView = (props) => {
                                             <Button key={genre.id} value={genre.id} onClick={removeGenre}>Remove Genre</Button>
                                         </ListItem>)}
                        
-                    </Typography>
+                    </Typography> 
                 
                 <CardActions>
 
