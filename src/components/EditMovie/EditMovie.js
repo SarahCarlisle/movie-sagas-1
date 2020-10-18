@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const EditMovie = (props) => {
     const classes = useStyles();
     const home = () => {
-        props.history.push('/')
+        props.history.push(`/details/${id}`)
     }
 
     useEffect(() => { props.dispatch({ type: 'GET_MOVIES' }) }, []);
@@ -49,7 +49,11 @@ const EditMovie = (props) => {
         <>
             <header className="App" >
     {movie[0] != undefined ? (<h1>Edit {movie[0].title}</h1>): <h1>Edit</h1>}
-
+                <span className="home-button">
+                    <Button className={classes.root} onClick={home}>
+                        <ArrowBackIcon />Back to Details
+                    </Button>
+                </span>
             </header>
             <Grid >
                 {movie[0] != undefined && movie.map(movie => <EditMovieView movie={movie} key={movie.id} />)}

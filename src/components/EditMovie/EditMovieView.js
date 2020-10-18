@@ -54,7 +54,7 @@ const removeGenre = (event) => {
                 <input value={movieUpdate.title} name="title" onChange={changeHandler} />
                 <br/>
                 <button onClick={submitEdit}>Save</button>
-                <button onClick={backToDetails}>Cancel</button>
+                
                 <br/>
                 <label>Add Genre:</label>
                 {genres[0] != undefined ? (<select onChange={addGenre} >
