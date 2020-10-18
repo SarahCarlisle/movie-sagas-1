@@ -45,10 +45,20 @@ router.get('/genre/all', (req, res) => {
 })
 
 //route to add a genre to a movie
-router.post('/add/genre/movie', (req, res) => {
+router.post('/add/movie/genre', (req, res) => {
     let queryText = `INSERT INTO "movie_genre" ("movie_id", "genre_id") VALUES ($1,$2)`;
     pool.query(queryText, [req.body.movie_id, req.body.genre_id]).then(result => res.sendStatus(200)).catch(err => {
         console.log('Error in posting genre for movie', err);
+        res.sendStatus(500);
+    })
+})
+
+//route to remove a genre from a movie
+router.delete('/delete/movie/genre/:movie_id/:genre_id', (req, res) => {
+    console.log('Delete request', req.params);
+    let queryText = `DELETE FROM "movie_genre" WHERE "movie_id"= $1 AND "genre_id"= $2;`;
+    pool.query(queryText, [req.params.movie_id, req.params.genre_id]).then(result => res.sendStatus(202)).catch(err => {
+        console.log('ERROR deleting genre from movie', err);
         res.sendStatus(500);
     })
 })
