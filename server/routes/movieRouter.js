@@ -32,9 +32,17 @@ router.put('/update', (req, res) => {
     .then(result => res.sendStatus(200)).catch(err => {
         console.log('ERROR in put', err);
         res.sendStatus(500);
+    });
+});
+
+
+router.get('/genre/all', (req, res) => {
+    let queryText = `SELECT * FROM "genres"`
+    pool.query(queryText).then(result => res.send(result.rows)).catch(err => {
+        console.log('ERROR getting all genres', err);
+        res.sendStatus(500);
     })
 })
-
 
 
 
