@@ -18,12 +18,20 @@ function* rootSaga() {
     yield takeEvery('GET_GENRES', fetchGenresSaga);
     yield takeEvery('UPDATE_MOVIE', putMovieSaga);
     yield takeEvery('GET_GENRE_DATABASE', fetchGenreDatabaseSaga);
-    yield takeEvery('ADD_GENRE_TO_MOVIE', addGenreToMovieSaga)
+    yield takeEvery('ADD_GENRE_TO_MOVIE', addGenreToMovieSaga);
+    yield takeEvery('REMOVE_GENRE_FROM_MOVIE', removeGenreFromMovieSaga);
+}
+
+function* removeGenreFromMovieSaga(action){
+    try{
+        yield Axios.delete(`/movies/delete/movie/genre/${action.payload.movie_id}/${action.payload.genre_id}`);
+        yield put({type: 'GET_GENRES'});
+    }catch(err){console.log('ERROR removing genre from movie', err)}
 }
 
 function* addGenreToMovieSaga(action){
     try{
-        const resposne = yield Axios.post('/movies/add/genre/movie', action.payload);
+        const resposne = yield Axios.post('/movies/add/movie/genre', action.payload);
         yield put({type:'GET_GENRES'});
     }catch(err){console.log('ERROR adding genre to movie', err);}
 }
