@@ -21,7 +21,8 @@ import ListItem from '@material-ui/core/ListItem';
 
 const useStyles = makeStyles({
     root: {
-
+        alignItems: "center",
+        maxWidth: 500,
     },
     media: {
         maxWidth: 300,
@@ -82,60 +83,8 @@ const EditMovieView = (props) => {
 
     return (
         <>
-            <div >
-                <img src={props.movie.poster} alt={props.movie.title} />
-                <div className="edit-info">
 
-                    <strong>Description:</strong> <br /><textarea rows="15" cols="40" onChange={changeHandler} name="description" value={movieUpdate.description}> </textarea>
-                    <br />
-                    <label>Movie Title:  </label>
-                    <input value={movieUpdate.title} name="title" onChange={changeHandler} />
-                    <br />
-                    <button onClick={submitEdit}>Save</button>
-
-                    <br />
-                    <label>Add Genre:</label>
-                    {/* dropdown menu of genres not associated with the movie, to choose from */}
-                    {genres[0] != undefined ? (
-                        // genres[0] is defined so that means we have genres associated with the movie
-                        //and need to filter out those genres from our drop down menu so we do
-                        //not add them to the movie again
-                    <select onChange={addGenre} >
-                        <option value=""></option>
-                            {/* we will make sure that we do not render until we have the array of associated
-                            genres for the current movie.  then we will filter the list of all
-                            possible genres to only include the options that are not included
-                            in the array of genres associated with this movie. then map over the 
-                            resulting array and place an option in the select list
-                             */}
-                        {genres[0].movie_genres != undefined && props.genreList.filter(genre => genres[0].movie_genres.indexOf(genre.name) == -1)
-                        .map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
-                    </select>)
-
-                     : (
-                        //  genres[0] is undefined so we need to include all genres as options
-                        //in the select so now it is just a simple
-                        //map over the genreList
-                     <select onChange={addGenre} >
-                        <option value=""></option>
-                        {props.genreList.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
-                    </select>)}
-
-                    {/* unordered list of genres that the movie has */}
-                    <ul>
-                        {/* filter through and pull out the genres associated with this movie
-                    i did this so i have access to both the id of the genre and the name of the
-                    genre.   */}
-                        {genres[0] != undefined &&
-                            props.genreList.filter(genre => genres[0].movie_genres.indexOf(genre.name) != -1)
-                                .map(genre => <ListItem key={genre.id}>{genre.name}
-                                    <button value={genre.id} onClick={removeGenre}>Remove Genre</button>
-                                </ListItem>)}
-                    </ul>
-
-                </div>
-            </div>
-            <Card className={classes.root}>
+            <Card >
               
                     <CardMedia
                         component="img"
@@ -146,12 +95,12 @@ const EditMovieView = (props) => {
                     />
                     <CardContent className={classes.content}>
                         <Typography gutterBottom variant="h5" component="h2">
-                            Edit Title: <Input value={movieUpdate.title} /><br />
+                        Edit Title: <Input onChange={changeHandler} name="title" value={movieUpdate.title} /><br />
                         </Typography>
                         <Typography gutterBottom variant="h5" component="h2">
                             Edit Description:
                         </Typography>
-                        <TextareaAutosize rowsMax={8} cols={50} defaultValue={movieUpdate.description} />
+                    <TextareaAutosize onChange={changeHandler} name="description" rowsMax={8} cols={50} defaultValue={movieUpdate.description} />
                         <Typography gutterBottom variant="h5" component="h2">
                             Add Genre:
                         </Typography>
@@ -162,7 +111,7 @@ const EditMovieView = (props) => {
                                 //and need to filter out those genres from our drop down menu so we do
                                 //not add them to the movie again
                                 <select onChange={addGenre} >
-                                    <option value=""></option>
+                                    <option value="">Add a Genre</option>
                                     {/* we will make sure that we do not render until we have the array of associated
                             genres for the current movie.  then we will filter the list of all
                             possible genres to only include the options that are not included
@@ -178,7 +127,7 @@ const EditMovieView = (props) => {
                                     //in the select so now it is just a simple
                                     //map over the genreList
                                     <select onChange={addGenre} >
-                                        <option value=""></option>
+                                        <option value="">Add Genre</option>
                                         {props.genreList.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
                                     </select>)}
                         </Typography>
@@ -199,8 +148,8 @@ const EditMovieView = (props) => {
                     </Typography> 
                 
                 <CardActions>
-
-
+                    <Button onClick={submitEdit}>Save</Button>
+                    <Button onClick={backToDetails}>Cancel</Button>
                 </CardActions>
             </Card>
         </>

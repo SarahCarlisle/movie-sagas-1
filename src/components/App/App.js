@@ -11,6 +11,7 @@ import {HashRouter as Router, Route } from 'react-router-dom'
 import Details from '../Details/Details';
 import Movies from '../Movies/Movies';
 import EditMovie from '../EditMovie/EditMovie';
+import { Container } from '@material-ui/core';
 
 const App = (props) =>  {
 
@@ -19,8 +20,8 @@ const App = (props) =>  {
     return (
       <>
 
-     
-      <Grid  >
+     <Container>
+      
         <Router>
           <Route exact path="/">
             <Movies />
@@ -32,7 +33,8 @@ const App = (props) =>  {
             <EditMovie />
           </Route>
         </Router>
-      </Grid>
+      
+        </Container>
      </>
     );
 

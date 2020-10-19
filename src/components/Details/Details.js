@@ -7,6 +7,7 @@ import DetailsView from './DetailsView';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
+//this component will be given a movie id on the url so we can filter out
+//our movie list to only show details for the desired movie...
+//we will render the actual details in the DetailsView component
 const Details = (props) => {
     const classes = useStyles();
     const home = () => {
@@ -32,10 +35,12 @@ const Details = (props) => {
 
     useEffect(() => { props.dispatch({ type: 'GET_MOVIES' }) }, []);
     useEffect(() => { props.dispatch({ type: 'GET_GENRES' }) }, []);
-
+    //const {id} is the id of the movie pulled off the url so /details/:id 
     const {id} = useParams();
-    console.log('details id is', id);
-    console.log('details props are', props);
+
+    //console.log('details id is', id);//used in testing
+    //console.log('details props are', props);//used in testing
+    //filter the movies global state so the new movie array includes only the movie we want.
   const movie =  props.movies.filter(m => m.id === Number(id));
     console.log('details movie is', movie);
 
@@ -49,6 +54,7 @@ const Details = (props) => {
 
         
         <>   
+            <Container>
             <header className="App" >
                 {movie[0] != undefined ? (<h1>{movie[0].title}</h1>) : <h1>Edit</h1>}
                 <span className="home-button">
@@ -58,9 +64,11 @@ const Details = (props) => {
                     <Button className={classes.root} onClick={editMovie}>Edit</Button>
                 </span>
             </header>
-        <Grid >
+
+
            {movie[0] != undefined &&  movie.map(movie => <DetailsView movie={movie} key={movie.id} />)}
-        </Grid>
+
+            </Container>
         </>
     );
 

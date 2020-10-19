@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
 import './EditMovie.css'
+import Container from '@material-ui/core/Container';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +48,7 @@ const EditMovie = (props) => {
 
 
         <>
+        <Container>
             <header className="App" >
     {movie[0] != undefined ? (<h1>Edit {movie[0].title}</h1>): <h1>Edit</h1>}
                 <span className="home-button">
@@ -55,9 +57,9 @@ const EditMovie = (props) => {
                     </Button>
                 </span>
             </header>
-            <Grid >
+       
                 {movie[0] != undefined && movie.map(movie => <EditMovieView movie={movie} key={movie.id} />)}
-            </Grid>
+            </Container>
         </>
     );
 

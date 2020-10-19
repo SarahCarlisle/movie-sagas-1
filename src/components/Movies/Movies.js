@@ -9,7 +9,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    input:{marginTop: 25},
+    input:{marginTop: 25,
+        color: "white",    
+    },
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,

@@ -11,21 +11,32 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import { useParams, withRouter } from 'react-router';
+import Container from '@material-ui/core/Container';
+
 
 
 const useStyles = makeStyles({
     root: {
-        
+        background: "linear - gradient(90deg, rgba(0, 0, 0, 1) 10 %, rgba(53, 82, 80, 1) 25 %, rgba(104, 147, 158, 1) 38 %, rgba(62, 184, 222, 1) 50 %, rgba(104, 147, 158, 1) 62 %, rgba(53, 82, 80, 1) 75 %, rgba(0, 0, 0, 1) 90 %)",
+        maxWidth: 500,
     },
     media:{
         maxWidth: 300,
     },
     content:{
+        background: "linear - gradient(90deg, rgba(0, 0, 0, 1) 10 %, rgba(53, 82, 80, 1) 25 %, rgba(104, 147, 158, 1) 38 %, rgba(62, 184, 222, 1) 50 %, rgba(104, 147, 158, 1) 62 %, rgba(53, 82, 80, 1) 75 %, rgba(0, 0, 0, 1) 90 %)"
+
     },
+    paperRoot:{
+        background: "linear - gradient(90deg, rgba(0, 0, 0, 1) 10 %, rgba(53, 82, 80, 1) 25 %, rgba(104, 147, 158, 1) 38 %, rgba(62, 184, 222, 1) 50 %, rgba(104, 147, 158, 1) 62 %, rgba(53, 82, 80, 1) 75 %, rgba(0, 0, 0, 1) 90 %)"
+
+    }
 });
 
 
-
+// in this component we will receive the movie info from the Details component as props
+// we still have access to the id on the url so we can filter the genre list to only give
+// us the info for the movie we want to know the genres for.
 const DetailsView = (props) => {
 
     const classes = useStyles();
@@ -50,9 +61,8 @@ const DetailsView = (props) => {
                 <ul>{genres[0] != undefined && genres[0].movie_genres.map(genre => <li key={genre}>{genre}</li>)}</ul>
             </div>
         </div> */}
-
-            <Card className={classes.root}>
-      <CardActionArea>
+    <Container>
+            <Card >
         <CardMedia
           component="img"
           className={classes.media}
@@ -74,7 +84,7 @@ const DetailsView = (props) => {
                 <ul>{genres[0] != undefined && genres[0].movie_genres.map(genre => <li key={genre}>{genre}</li>)}</ul>
             </Typography>
         </CardContent>
-      </CardActionArea>
+    
       <CardActions>
         <Button size="small" color="primary" onClick={editMovie}>
             <EditIcon></EditIcon>Edit
@@ -82,6 +92,7 @@ const DetailsView = (props) => {
 
       </CardActions>
     </Card>
+    </Container>
     </>
     );
 
